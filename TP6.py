@@ -161,8 +161,14 @@ from random import shuffle
 from Paquetes.Ganadores import eleccion
 
 print("Bienvenido al simulador de sorteos!")
-Participantes=int(input("Ingrese la cantidad de participantes [int]: "))
-NumGanadores=int(input("Ingrese la cantidad de ganadores: "))
+
+while True:
+    try:
+        Participantes=int(input("Ingrese la cantidad de participantes [int]: "))
+        NumGanadores=int(input("Ingrese la cantidad de ganadores: "))
+        break
+    except ValueError:
+        print("Numero invalido.")
 
 papelitosConNombres=[]
 for i in range(Participantes):
@@ -195,3 +201,58 @@ Ganador=elegirGanador(papelitosConNombres, NumGanadores)
 eleccion.imprimirGanador(Ganador)
 
 """
+
+"""
+
+8. (Opcional) Escriba una función que pida al usuario ingresar su fecha de
+nacimiento y sea capaz de devolver la cantidad de días desde su
+nacimiento hasta hoy.
+
+"""
+
+from datetime import date
+import time
+
+print("Bienvenido al calculador de dias desde su nacimiento!")
+print("- Ingrese su fecha de nacimiento -")
+Opcion="Año"
+while True:
+    try:
+        match Opcion:
+            case "Año":
+                Año=int(input("Año: "))
+                Opcion="Mes"
+            case "Mes": 
+                Mes=int(input("Mes: "))
+                Opcion="Dia"
+            case "Dia":
+                Dia=int(input("Dia: "))
+                break
+    except ValueError:
+        print("Numero invalido.")
+
+
+FechaDeNacimiento=date(Año, Mes, Dia)
+Hoy=date.fromtimestamp(time.time())
+
+DiasDesdeNac=Hoy-FechaDeNacimiento
+DiasDesdeNac=str(DiasDesdeNac)
+
+if len(DiasDesdeNac) == 7:
+    DiasDesdeNac=0
+else:
+    try:
+        DiasDesdeNac=int(DiasDesdeNac[:-14])
+    except ValueError:
+        DiasDesdeNac=int(DiasDesdeNac[:-13])
+
+if DiasDesdeNac < 0:
+    print("Introduciste una fecha en el futuro.")
+elif DiasDesdeNac == 0:
+    print("...Es hoy?")
+else:
+    if DiasDesdeNac == 1:
+        Mensaje=f"pasó {DiasDesdeNac} dia."
+    else:
+        Mensaje=f"pasaron {DiasDesdeNac} días."
+    print(f"Desde el {FechaDeNacimiento} hasta el dia de la fecha {Hoy}, {Mensaje}")
