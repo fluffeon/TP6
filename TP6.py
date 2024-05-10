@@ -211,7 +211,6 @@ nacimiento hasta hoy.
 """
 
 from datetime import date
-import time
 
 print("Bienvenido al calculador de dias desde su nacimiento!")
 print("- Ingrese su fecha de nacimiento -")
@@ -233,7 +232,7 @@ while True:
 
 
 FechaDeNacimiento=date(Año, Mes, Dia)
-Hoy=date.fromtimestamp(time.time())
+Hoy=date.today()
 
 DiasDesdeNac=Hoy-FechaDeNacimiento
 DiasDesdeNac=str(DiasDesdeNac)
